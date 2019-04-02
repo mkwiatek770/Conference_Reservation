@@ -1,0 +1,34 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+<h1>Room info</h1>
+<br>
+<h3>Name: {{ room.name }}</h3>
+<h3>Cappacity: {{ room.capacity }}</h3>
+<br><br>
+<h3>Following 14 days:</h3>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Unocupated/Occupated</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for day, bool in days.items %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ day }}</td>
+            {% if bool %}
+            <td class="available">Available</td>
+            {% else %}
+            <td class="not_available">Not available</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

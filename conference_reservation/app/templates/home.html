@@ -1,0 +1,35 @@
+{% extends 'base2.html' %}
+{% block content %}
+<h1>Available Conference rooms</h1>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Room</th>
+            <th scope="col">Capacity</th>
+            <th>Projector Available</th>
+            <th>Today Available/Not Available</th>
+            <th>Rent/ Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for room, available in room_available.items %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td><a style="color:white" href="{% url 'room_info' room.id %}">{{ room.name }}</a></td>
+            <td>{{ room.capacity }}</td>
+            <td>{{ room.projector_available }}</td>
+            {% if available %}
+            <td class="available">Available</td>
+            {% else %}
+            <td class="not_available">Not available</td>
+            {% endif %}
+            <td><a href="{% url 'add_reservation_byid' room.id %}">Rent</a> <a href="{% url 'modify_room' room.id %}">Edit</a></td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
